@@ -1,1 +1,16 @@
-sealed class LiquidColor
+enum class LiquidColor {
+    PINK,
+    RED,
+    GREEN,
+    BLUE,
+    ORANGE,
+    YELLOW,
+    BROWN,
+    SALAD,
+    BURGUNDY,
+    LIGHTRED,
+    WHITE,
+    VIOLET,
+    LIGHTBLUE,
+    DARKGREEN,
+}
