@@ -1,16 +1,16 @@
-enum class LiquidColor {
-    PINK,
-    RED,
-    GREEN,
-    BLUE,
-    ORANGE,
-    YELLOW,
-    BROWN,
-    SALAD,
-    BURGUNDY,
-    LIGHTRED,
-    WHITE,
-    VIOLET,
-    LIGHTBLUE,
-    DARKGREEN,
+sealed class LiquidColor {
+    object PINK : LiquidColor()
+    object RED : LiquidColor()
+    object GREEN : LiquidColor()
+    object BLUE : LiquidColor()
+    object ORANGE : LiquidColor()
+    object YELLOW : LiquidColor()
+    object BROWN : LiquidColor()
+    object SALAD : LiquidColor()
+    object BURGUNDY : LiquidColor()
+    object LIGHTRED : LiquidColor()
+    object WHITE : LiquidColor()
+    object VIOLET : LiquidColor()
+    object LIGHTBLUE : LiquidColor()
+    object DARKGREEN : LiquidColor()
 }
