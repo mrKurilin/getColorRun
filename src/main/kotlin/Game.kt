@@ -14,7 +14,6 @@ class Game(private val flasks: List<Flask>) {
                 ).transfuse()
             }
         }
-
         job.join()
     }
 

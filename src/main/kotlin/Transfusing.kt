@@ -24,6 +24,8 @@ class Transfusing(
                 moveBack()
             }
         }
+
+        println("Done from $firstFlaskIndex")
     }
 
     private fun makeFirstMove() {
@@ -49,11 +51,16 @@ class Transfusing(
     private fun checkForWin() {
         if (isWin() && (winMoves.isEmpty() || winMoves.size > moves.size)) {
             winMoves = moves.map { it.copy() }
+            println("${winMoves.size} moves:")
             println(winMoves.joinToString())
         }
     }
 
     private fun findMove(): Move? {
+        if (winMoves.isNotEmpty() && moves.size > winMoves.size) {
+            return null
+        }
+
         val fromStartIndex = (backedMove?.fromIndex?.plus(1)) ?: 0
         var toStartIndex = (backedMove?.toIndex?.plus(1)) ?: 0
 

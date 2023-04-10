@@ -47,23 +47,13 @@ data class Flask(
     fun isNotFull(): Boolean = !isFull()
 
     fun canAccept(liquidToMove: Liquid): Boolean {
-        if (this.isEmpty()) {
-            return true
+        return when {
+            this.isEmpty() -> true
+            this.topColor() != liquidToMove.color -> false
+            this.topLiquid() === liquidToMove -> false
+            this.freeSpace() < liquidToMove.volume -> false
+            else -> true
         }
-
-        if (this.freeSpace() < liquidToMove.volume) {
-            return false
-        }
-
-        if (this.topLiquid() === liquidToMove) {
-            return false
-        }
-
-        if (this.topColor() != liquidToMove.color) {
-            return false
-        }
-
-        return true
     }
 
     private fun topColor(): LiquidColor {
@@ -87,5 +77,23 @@ data class Flask(
 
     fun copy(): Flask {
         return Flask(this.liquids.map { it.copy() }.toMutableList())
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+
+        other as Flask
+
+        if (liquids.size != other.liquids.size) return false
+        for (i in liquids.indices) {
+            if (liquids[i] != other.liquids[i]) return false
+        }
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return liquids.hashCode()
     }
 }
