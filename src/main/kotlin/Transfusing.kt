@@ -1,9 +1,12 @@
+import Game.Companion.checkWinMoves
 import Game.Companion.winMoves
 
 class Transfusing(
     private val flasks: List<Flask>,
     private val firstFlaskIndex: Int
 ) {
+
+    private val loseStates = LoseStates()
 
     private val moves = mutableListOf<Move>()
     private var backedMove: Move? = null
@@ -49,15 +52,20 @@ class Transfusing(
     }
 
     private fun checkForWin() {
-        if (isWin() && (winMoves.isEmpty() || winMoves.size > moves.size)) {
-            winMoves = moves.map { it.copy() }
-            println("${winMoves.size} moves:")
-            println(winMoves.joinToString())
+        if (isWin()) {
+            checkWinMoves(moves)
         }
     }
 
     private fun findMove(): Move? {
+        val flasksSet = flasks.map { it.copy() }.toHashSet()
+
+        if (loseStates.contains(flasksSet)) {
+            return null
+        }
+
         if (winMoves.isNotEmpty() && moves.size > winMoves.size) {
+            loseStates.add(flasksSet)
             return null
         }
 
@@ -80,8 +88,10 @@ class Transfusing(
             }
 
             toStartIndex = 0
+
         }
 
+        loseStates.add(flasksSet)
         return null
     }
 

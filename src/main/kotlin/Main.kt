@@ -1,3 +1,3 @@
 fun main() {
-    Game(Flasks().get181lvl()).start()
+    Game(Levels().get182lvl()).start()
 }
